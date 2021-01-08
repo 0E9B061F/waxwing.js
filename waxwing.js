@@ -8,7 +8,7 @@ select textarea abbr accronym address b bdi bdo big blockquote cite code del
 dfn em i ins kbd mark output pre progress q rp rt ruby s samp small strike
 strong sub sup tt u var wbr dd dir dl dt li ol menu ul caption col colgroup
 table tbody td tfoot thead th tr noscript script area audio canvas embed
-figcaption figure frame frameset iframe image map noframes object param source
+figcaption figure frame frameset iframe img image map noframes object param source
 time video`
 
 const svgtags = `svg g line`
@@ -20,7 +20,7 @@ const svgtags = `svg g line`
 // div({id: 'foo', h: 100})
 // div({id: 'foo', h: 100}, c=>{})
 
-function mkel(t, names, block) {
+function mkel(t, names, attrs, block) {
   let el
   if (Array.isArray(t)) {
     el = document.createElementNS(t[0], t[1])
@@ -32,24 +32,51 @@ function mkel(t, names, block) {
     names = null
   } else if (typeof(names) == 'string') {
     names = names ? names.split(/\s+/) : []
-    let id = false
-    let classes = false
-    if (names[0] && names[0][0] == '#') {
-      id = names[0].slice(1)
-      classes = names.slice(1)
-      if (!id.length) id = false
-      if (!classes.length) classes = false
-    } else {
-      classes = names.length ? names : false
-    }
+
+    const idList = []
+    const mixedList = []
+    const anchorList = []
+    const classList = []
+
+    names.forEach(n=> {
+      if (n[0] == '#') idList.push(n.slice(1))
+      else if (n[0] == '$') mixedList.push(n.slice(1))
+      else if (n[0] == '@') anchorList.push(n.slice(1))
+      else classList.push(n)
+    })
+
+    if (idList.length > 1) throw 'Error: multiple IDs specified'
+    if (mixedList.length > 1) throw 'Error: multiple anchor IDs specified'
+    if (anchorList.length > 1) throw 'Error: multiple anchors specified'
+    if (anchorList.length && mixedList.length) throw 'Error: multiple anchors specified'
+    if (idList.length && mixedList.length) throw 'Error: multiple IDs specified'
+
+    let id = mixedList[0] || idList[0]
+    let classes = classList.length ? classList : false
+    if (mixedList[0]) mixedList[0] = cc(mixedList[0])
+    let anchor = mixedList[0] || anchorList[0]
+
     if (id) el.id = id
     if (classes) el.classList.add(...classes)
+    if (anchor) el.setAttribute('anchor', anchor)
+    if (t == 'input' && id) el.setAttribute('name', id)
   } else if (typeof(names) == 'object') {
-    const attrs = Object.keys(names)
-    let attr
-    for (let i = 0; i < attrs.length; i++) {
-      attr = attrs[i]
-      el.setAttribute(attr, names[attr])
+    const akeys = Object.keys(names)
+    let a
+    for (let i = 0; i < akeys.length; i++) {
+      a = akeys[i]
+      el.setAttribute(a, names[a])
+    }
+  }
+  if (typeof(attrs) == 'function') {
+    block = attrs
+    attrs = null
+  } else if (typeof(attrs) == 'object') {
+    const akeys = Object.keys(attrs)
+    let a
+    for (let i = 0; i < akeys.length; i++) {
+      a = akeys[i]
+      el.setAttribute(a, attrs[a])
     }
   }
   const ctx = context()
@@ -58,12 +85,18 @@ function mkel(t, names, block) {
   return el
 }
 
+function cc(s) {
+  return s.replace(/-([a-z])/g, c=> c[1].toUpperCase())
+}
+
 function text(s) {
   return document.createTextNode(s)
 }
 
 function wrap(f, collection, ...args) {
-  collection.push(f(...args))
+  const o = f(...args)
+  collection.push(o)
+  return o
 }
 
 const tags = {
@@ -73,30 +106,42 @@ const tags = {
 }
 
 tagnames.split(/\s+/).forEach(tn=> {
-  tags[tn] = function(names, block) {
-    return mkel(tn, names, block)
+  tags[tn] = function(names, attrs, block) {
+    return mkel(tn, names, attrs, block)
   }
 })
 svgtags.split(/\s+/).forEach(tn=> {
-  tags[tn] = function(names, block) {
-    return mkel(['http://www.w3.org/2000/svg', tn], names, block)
+  tags[tn] = function(names, attrs, block) {
+    return mkel(['http://www.w3.org/2000/svg', tn], names, attrs, block)
   }
 })
 
 function context() {
   const c = {}
   c.els = []
-  c.mkel = function(...args) { wrap(mkel, c.els, ...args) }
+  c.mkel = function(...args) { return wrap(mkel, c.els, ...args) }
   Object.keys(tags).forEach(tag=> {
-    c[tag] = function(...args) { wrap(tags[tag], c.els, ...args) }
+    c[tag] = function(...args) { return wrap(tags[tag], c.els, ...args) }
   })
   return c
 }
 
-function start(block) {
+function start(anchor, block) {
+  const anchors = {}
+  if (typeof(anchor) == 'function') {
+    block = anchor
+    anchor = document.body
+  }
   const ctx = context()
   if (block) block.call(ctx, ctx)
-  ctx.els.forEach(e=> document.body.append(e))
+  ctx.els.forEach(e=> {
+    if (e.hasAttribute('anchor')) anchors[e.getAttribute('anchor')] = e
+    e.querySelectorAll('[anchor]').forEach(n=> {
+      anchors[n.getAttribute('anchor')] = n
+    })
+    anchor.append(e)
+  })
+  return anchors
 }
 
 const html = { start, mkel }
