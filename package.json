@@ -1,21 +1,38 @@
 {
   "name": "waxwing.js",
-  "version": "0.1.1",
-  "description": "Create HTML elements from javascript",
-  "main": "waxwing.js",
-  "files": ["waxwing.js"],
-  "scripts": {
-    "test": "mocha",
-    "doc": "./node_modules/.bin/esdoc -c .esdoc.json",
-    "pub": "npm publish --registry http://localhost:4873"
+  "version": "0.2.0",
+  "series": "HISTORIS",
+  "description": "An elegant library for creating HTML elements",
+  "license": "MIT",
+  "homepage": "https://github.com/0E9B061F/waxwing.js",
+  "bugs": "https://github.com/0E9B061F/waxwing.js/issues",
+  "repository": "github:0E9B061F/waxwing.js",
+  "author": {
+    "name": "0E9B061F",
+    "email": "0E9B061F@protonmail.com",
+    "url": "https://github.com/0E9B061F"
   },
-  "author": "aetherised",
-  "license": "ISC",
-  "dependencies": {},
+  "main": "lib/waxwing.js",
+  "directories": {
+    "lib": "lib",
+    "test": "spec"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "test": "jasmine",
+    "doc": "jsdoc"
+  },
+  "keywords": [
+    "html",
+    "html element",
+    "dsl",
+    "tree",
+    "frontend"
+  ],
   "devDependencies": {
-    "chai": "^4.2.0",
-    "esdoc": "^1.1.0",
-    "esdoc-standard-plugin": "^1.0.0",
-    "mocha": "^6.1.4"
+    "jasmine": "^5.1.0",
+    "jsdom": "^24.0.0"
   }
 }
