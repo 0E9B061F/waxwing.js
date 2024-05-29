@@ -1,7 +1,8 @@
-# 🐦 **waxwing.js** v0.3.1 'AGRIAS'
+# 🐦 **waxwing.js** v0.3.2 'AGRIAS'
 [![Version][icon-ver]][repo]
 [![Series][icon-ser]][repo]
 [![License][icon-lic]][license]
+[![Maintenance][icon-mnt]][commits]<br/>
 [![NPM][icon-npm]][pkg]
 
 **waxwing** is a JS library for creating HTML. It has a simple, elegant syntax using the `html.start`:
@@ -93,8 +94,10 @@ Available under the terms of the [MIT License][license].
 [repo]:https://github.com/0E9B061F/waxwing.js
 [license]:https://github.com/0E9B061F/waxwing.js/blob/master/LICENSE
 [pkg]:https://www.npmjs.com/package/waxwing.js
+[commits]:https://github.com/0E9B061F/waxwing.js/commits/main
 
 [icon-ver]:https://img.shields.io/github/package-json/v/0E9B061F/waxwing.js.svg?style=flat-square&logo=github&color=%236e7fd2
 [icon-ser]:https://img.shields.io/badge/dynamic/json?color=%236e7fd2&label=series&prefix=%27&query=series&suffix=%27&url=https%3A%2F%2Fraw.githubusercontent.com%2F0E9B061F%2Fwaxwing.js%2Fmaster%2Fpackage.json&style=flat-square
 [icon-lic]:https://img.shields.io/github/license/0E9B061F/waxwing.js.svg?style=flat-square&color=%236e7fd2
+[icon-mnt]:https://img.shields.io/maintenance/yes/2024.svg?style=flat-square
 [icon-npm]:https://img.shields.io/npm/v/waxwing.js.svg?style=flat-square&logo=npm&color=%23de2657
