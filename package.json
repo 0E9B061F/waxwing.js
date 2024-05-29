@@ -1,6 +1,6 @@
 {
   "name": "waxwing.js",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "series": "HISTORIS",
   "description": "An elegant library for creating HTML elements",
   "license": "MIT",
@@ -21,8 +21,9 @@
     "lib/**/*"
   ],
   "scripts": {
-    "test": "jasmine",
-    "doc": "jsdoc"
+    "test": "jasmine-browser-runner runSpecs",
+    "doc": "jsdoc",
+    "build": "webpack"
   },
   "keywords": [
     "html",
@@ -32,7 +33,13 @@
     "frontend"
   ],
   "devDependencies": {
+    "@babel/core": "^7.24.6",
+    "@babel/preset-env": "^7.24.6",
+    "babel-loader": "^9.1.3",
     "jasmine": "^5.1.0",
-    "jsdom": "^24.0.0"
+    "jasmine-browser-runner": "^2.4.0",
+    "jasmine-core": "^5.1.2",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
   }
 }
