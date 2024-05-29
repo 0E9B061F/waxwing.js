@@ -1,11 +1,13 @@
-# 🐦 **waxwing.js** v0.3.2 'AGRIAS'
+# 🐦 **waxwing.js** v0.3.3 'AGRIAS'
 [![Version][icon-ver]][repo]
 [![Series][icon-ser]][repo]
 [![License][icon-lic]][license]
 [![Maintenance][icon-mnt]][commits]<br/>
 [![NPM][icon-npm]][pkg]
 
-**waxwing** is a JS library for creating HTML. It has a simple, elegant syntax using the `html.start`:
+**waxwing.js** is a JS library for creating HTML with a simple, elegant syntax.
+
+**waxwing** exposes two slightly different functions for building HTML elements. Using the higher-level `html.start` function:
 
 ```js
 const html = require("waxwing.js")
@@ -40,7 +42,7 @@ console.log(els)
 
 `html.start` will always anchor the created elements to another element (`document.body` if no element is given). It also creates no top-level element, but zero or more elements which will become children of the anchor element.
 
-`html.mkel` is similar to `html.start`, but it creates and returns a single top-level element without anchoring it to anything. You'll have to attach the element to the document yourself, if you intend to. Example usage:
+The second function **waxwing** exposes is `html.mkel`. `html.mkel` is similar to `html.start`, but it creates and returns a single top-level element without anchoring it to anything. You'll have to attach the element to the document yourself, if you intend to. Example usage:
 
 ```js
 // Create a div element with an id, a class, and an attribute `bat`:
