@@ -1,4 +1,4 @@
-# 🐦 **waxwing.js** v0.3.0 'HISTORIS'
+# 🐦 **waxwing.js** v0.3.1 'AGRIAS'
 [![Version][icon-ver]][repo]
 [![Series][icon-ser]][repo]
 [![License][icon-lic]][license]
