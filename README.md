@@ -1,4 +1,4 @@
-# 🐦 **waxwing.js** v0.3.3 'AGRIAS'
+# 🐦 **waxwing.js** v0.3.4 'AGRIAS'
 [![Version][icon-ver]][repo]
 [![Series][icon-ser]][repo]
 [![License][icon-lic]][license]
@@ -16,8 +16,8 @@ const html = require("waxwing.js")
 // `document.body` could be ommitted; it is the default anchor if none is given
 const els = html.start(document.body, c=> {
   c.div("#example-head", c=> {
-    c.a("#title", {href: "https://github.com/0E9B061F/fantasma.js"}, c=> c.text("FANTASMA.JS"))
-    c.a("#site", {href: "https://0E9B061F.github.io"}, c=> c.text("0E9B061F.github.io"))
+    c.a("#title", {href: "https://github.com/0E9B061F/fantasma.js"}, c=> c("FANTASMA.JS"))
+    c.a("#site", {href: "https://0E9B061F.github.io"}, c=> c("0E9B061F.github.io"))
   })
   c.div("#example-main smooth", c=> {
     // The `$name` syntax gives the element the id `name` and also creates a
@@ -52,8 +52,8 @@ const foo = html.mkel("div", "#foo bar", {bat: "quz"})
 
 // You can also create HTML trees with `html.mkel`:
 const foo = html.mkel("div", "#foo", c=> {
-  c.h1("title", c=> c.text("Hello"))
-  c.p(c=> c.text("Welcome to the website!"))
+  c.h1("title", c=> c("Hello"))
+  c.p(c=> c("Welcome to the website!"))
 })
 // The created tree will be like:
 //   <div id="foo">
