@@ -1,4 +1,4 @@
-# 🐦 **waxwing.js** v0.3.4 'AGRIAS'
+# :bird: **waxwing.js** v0.3.5 'AGRIAS'
 [![Version][icon-ver]][repo]
 [![Series][icon-ser]][repo]
 [![License][icon-lic]][license]

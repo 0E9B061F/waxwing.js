@@ -1,7 +1,10 @@
 {
   "name": "waxwing.js",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "series": "AGRIAS",
+  "mkv": {
+    "before": ":bird:"
+  },
   "description": "An elegant library for creating HTML elements",
   "license": "MIT",
   "homepage": "https://github.com/0E9B061F/waxwing.js",
@@ -26,7 +29,8 @@
   "scripts": {
     "test": "jasmine-browser-runner runSpecs",
     "doc": "jsdoc",
-    "build": "webpack"
+    "build": "webpack",
+    "mkv": "mkv"
   },
   "keywords": [
     "html",
@@ -36,6 +40,7 @@
     "frontend"
   ],
   "devDependencies": {
+    "@0e9b061f/mkv": "^0.1.0",
     "@babel/core": "^7.24.6",
     "@babel/preset-env": "^7.24.6",
     "babel-loader": "^9.1.3",
